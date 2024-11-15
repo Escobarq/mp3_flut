@@ -31,8 +31,6 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
-  on_audio_query: ^2.9.0
-  permission_handler: ^10.0.0
 
 dev_dependencies:
   flutter_test:

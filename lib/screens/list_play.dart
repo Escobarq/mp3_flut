@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/services/permissions.dart';
-import 'package:on_audio_query/on_audio_query.dart';
 import 'play_music.dart';
 
 class PlaylistView extends StatefulWidget {
@@ -11,8 +9,6 @@ class PlaylistView extends StatefulWidget {
 }
 
 class _PlaylistViewState extends State<PlaylistView> {
-  SongModel? selectedSong;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,9 +98,7 @@ class _PlaylistViewState extends State<PlaylistView> {
             ),
             // Song List
             Expanded(
-              child: Permissions().build(context, () {
-                
-              }),
+              child: Container(),
             ),
           ],
         ),
