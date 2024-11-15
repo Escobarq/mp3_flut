@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/services/permissions.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 import 'play_music.dart';
 
 class PlaylistView extends StatefulWidget {
@@ -9,6 +11,8 @@ class PlaylistView extends StatefulWidget {
 }
 
 class _PlaylistViewState extends State<PlaylistView> {
+  SongModel? selectedSong;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,8 +28,9 @@ class _PlaylistViewState extends State<PlaylistView> {
                   IconButton(
                     icon: const Icon(Icons.arrow_back, color: Colors.white),
                     onPressed: () => Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => const MusicPlay())
-                    ),
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MusicPlay())),
                   ),
                   const Text(
                     'Playlist',
@@ -97,112 +102,12 @@ class _PlaylistViewState extends State<PlaylistView> {
             ),
             // Song List
             Expanded(
-              child: ListView(
-                children: [
-                  _buildSongItem('01', 'Around The Sun', 'Poolside', false, false),
-                ],
-              ),
-            ),
-            // Mini Player
-            Container(
-              height: 64,
-              decoration: BoxDecoration(
-                color: Colors.grey[900],
-                border: Border(
-                  top: BorderSide(
-                    color: Colors.grey[800]!,
-                    width: 0.5,
-                  ),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(4),
-                      child: Image.network(
-                        'https://placeholder.com/60',
-                        width: 40,
-                        height: 40,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    const Expanded(
-                      child: Text(
-                        "What's next",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.skip_previous, color: Colors.white),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.play_arrow, color: Colors.white),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.skip_next, color: Colors.white),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ),
+              child: Permissions().build(context, () {
+                
+              }),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildSongItem(
-    String number,
-    String title,
-    String artist,
-    bool isPlaying,
-    bool isFavorite,
-  ) {
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-      leading: SizedBox(
-        width: 32,
-        child: Text(
-          number,
-          style: TextStyle(
-            color: isPlaying ? Colors.blue : Colors.grey,
-            fontSize: 14,
-          ),
-        ),
-      ),
-      title: Text(
-        title,
-        style: TextStyle(
-          color: isPlaying ? Colors.blue : Colors.white,
-          fontSize: 16,
-        ),
-      ),
-      subtitle: Text(
-        artist,
-        style: const TextStyle(
-          color: Colors.grey,
-          fontSize: 14,
-        ),
-      ),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (isPlaying)
-            const Icon(
-              Icons.volume_up,
-              color: Colors.blue,
-              size: 20,
-            ),
-        ],
       ),
     );
   }

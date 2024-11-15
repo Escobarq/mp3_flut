@@ -9,7 +9,6 @@ class MusicPlay extends StatefulWidget {
 }
 
 class _MusicPlayState extends State<MusicPlay> {
-  double _audioProgress = 0.3;
   bool _isPlaying = false;
 
   @override
@@ -138,10 +137,10 @@ class _MusicPlayState extends State<MusicPlay> {
               const SizedBox(height: 20),
               // Progress slider
               Slider(
-                value: _audioProgress,
+                value: 0.1,
                 onChanged: (value) {
                   setState(() {
-                    _audioProgress = value;
+                    value = value;
                   });
                 },
                 activeColor: Colors.blue,
